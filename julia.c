@@ -21,8 +21,8 @@ void    set_julia(int argc, char **argv, t_data *frac)
     frac->lim->cim = 0.35;
     if (argc == 4)
     {
-        flag += ft_atoi_float(argv[2], &frac->lim->cr);
-        flag += ft_atoi_float(argv[3], &frac->lim->cim);
+        flag += ft_atof(argv[2], &frac->lim->cr);
+        flag += ft_atof(argv[3], &frac->lim->cim);
     }
     if (argc == 2 || flag > 0 || argc == 3 || argc > 4)
     {
@@ -38,7 +38,7 @@ void    set_julia(int argc, char **argv, t_data *frac)
     frac->lim->ymax = 2;
 }
 
-int ft_atoi_float(char *str, double *c)
+int ft_atof(char *str, double *c)
 {
     int     i;
     double  x;
