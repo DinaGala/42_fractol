@@ -15,8 +15,8 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror -MMD -I ./ -g -fsanitize=address
 ML_FLAGS = -framework OpenGL -framework AppKit
 
-SRC = fractol.c aux.c mandelbrot.c 
-#julia.c burning_ship.c
+SRC = fractol.c aux.c mandelbrot.c julia.c burning_ship.c
+# 
 OBJ = $(SRC:.c=.o)
 DEPS = $(SRC:.c=.d)
 

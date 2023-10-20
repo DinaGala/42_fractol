@@ -22,12 +22,16 @@ void    ft_pixel_put(t_data *frac, int x, int y, int color)
 
 int ft_color(t_data *frac)
 {
-    if (frac->i == 100)
+    if (frac->i == 1000)
         return (0x000000);
-    if (frac->i < 100)
-        return (0x127640);
+    else if (frac->i > 80)
+        return (0x129640);
+    else if (frac->i > 20)
+        return (0x227640);
+    else if (frac->i > 5)
+        return (0x767640);
     else
-        return (0x353728);
+        return (0x373889);
 }
 
 //int ft_key_hook(int keycode, t_data frac)

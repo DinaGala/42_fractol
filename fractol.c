@@ -14,7 +14,7 @@
 
 int	ft_free(t_data *frac)
 {
-	ft_printf("Enter ft_free \n"); //erase
+//	ft_printf("Enter ft_free \n"); //erase
 	if (frac && frac->img && frac->img->ipt)
 		mlx_destroy_image(frac->init, frac->img->ipt);
 	if (frac && frac->win)
@@ -31,7 +31,7 @@ void	fractal_draw(t_data *frac)
 	int	b;
 
 	a = -1;
-	printf("entering draw, ymax %f \n", frac->lim.ymax); //erase
+//	printf("entering draw, ymax %f \n", frac->lim.ymax); //erase
 	while (++a < WIDTH)
 	{
 		frac->x = frac->lim.xmin + (double)a * (frac->lim.xmax - \
@@ -48,17 +48,17 @@ void	fractal_draw(t_data *frac)
 			if (frac->type == 1)
 				draw_mandel(frac);
 	//		ft_printf("I'm in the fractal_draw"); //erase
-		//	else if (frac->type == 2)
-		//		draw_julia(frac);
-		//	else if (frac->type == 3)
-		//		draw_ship(frac);
+			else if (frac->type == 2)
+				draw_julia(frac);
+			else if (frac->type == 3)
+				draw_ship(frac);
 			ft_pixel_put(frac, a, b, ft_color(frac));
 		}
 //		ft_printf("after pixel put %i \n", a); //erase
 	}
-	ft_printf("before put to window \n"); //erase
+//	ft_printf("before put to window \n"); //erase
 	mlx_put_image_to_window(frac->init, frac->win, frac->img->ipt, 0, 0);
-	ft_printf("after put to window \n"); //erase
+//	ft_printf("after put to window \n"); //erase
 }
 
 void	initialize(char *name, t_data *frac)
@@ -79,12 +79,12 @@ void	initialize(char *name, t_data *frac)
 	}
 	frac->img = &img;
 	frac->img->ipt = mlx_new_image(frac->init, WIDTH, HEIGHT);
-//	if (!frac->img->ipt)
-//		exit (ft_free(frac));
-	printf("before new get data addr, ymax %f \n", frac->lim.ymax); //erase
+	if (!frac->img->ipt)
+		exit (ft_free(frac));
+//	printf("before new get data addr, ymax %f \n", frac->lim.ymax); //erase
 	frac->img->ppt = mlx_get_data_addr(frac->img->ipt, &frac->img->bits, \
 	&frac->img->line, &frac->img->endian);
-	printf("after new get data addr, ymax %f \n", frac->lim.ymax); //erase
+//	printf("after new get data addr, ymax %f \n", frac->lim.ymax); //erase
 //	printf("after initialize, ymax %f \n", frac->lim->ymax); //erase
 	fractal_draw(frac);
 //	ft_printf("after initialize \n"); //erase
@@ -96,19 +96,18 @@ void	parse(int ac, char **argv, t_data *frac)
 
 	ft_memset(&lim, 0, sizeof(t_lim));
 	frac->lim = lim;
-//	return ;
 	if (ac == 2 && !ft_strncmp(argv[1], "mandelbrot", 10) && !*(argv[1] + 10))
 	{
 		set_mandelbrot(frac);
 	}	
-/*	else if (ac >= 2 && !ft_strncmp(argv[1], "julia", 5) && !*(argv[1] + 5))
+	else if (ac >= 2 && !ft_strncmp(argv[1], "julia", 5) && !*(argv[1] + 5))
 	{
 		frac->type = 2;
 		set_julia(ac, argv, frac);
 	}
 	else if (ac == 2 && !ft_strncmp(argv[1], "burning_ship", 12) \
 	&& !*(argv[1] + 12))
-		set_bship(frac);*/
+		set_ship(frac);
 	else
 	{
 		ft_printf("Introduce one of the available fractals:\n");
@@ -135,7 +134,7 @@ int	main(int argc, char **argv)
 //	&frac.img->line, &frac.img->endian);
 //	ft_pixel_put(&frac, 5, 5, 0x224477);
 //	mlx_put_image_to_window(frac.init, frac.win, frac.img->ipt, 0, 0);
-//	mlx_hook(frac.win, 17, 0, ft_free, &frac);
+	mlx_hook(frac.win, 17, 1L << 0, ft_free, &frac);
 //	mlx_key_hook(frac.win, ft_key_hook, &frac);
 //	mlx_key_hook(frac.win, fn, (void *)0);
 	mlx_loop(frac.init);

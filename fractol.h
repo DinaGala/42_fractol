@@ -74,13 +74,13 @@ int     ft_color(t_data *frac);
 void    set_mandelbrot(t_data *frac);
 void    draw_mandel(t_data *frac);
 
-/****  julia.c - all functions related to julia ******
+/****  julia.c - all functions related to julia ******/
 void    set_julia(int argc, char **argv, t_data *frac);
 int     ft_atof(char *str, double *c);
-void    draw_julia(t_data *frac);*/
+void    draw_julia(t_data *frac);
 
-/****  burning_ship.c - all functions related to burning_ship ******
-void    set_bship(t_data *frac);
-void    draw_julia(t_data *frac);*/
+/****  burning_ship.c - all functions related to burning_ship ******/
+void    set_ship(t_data *frac);
+void    draw_ship(t_data *frac);
 
 #endif
