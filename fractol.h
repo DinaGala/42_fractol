@@ -63,12 +63,14 @@ typedef struct s_data
 void	initialize(char *argv, t_data *frac);
 int     ft_free(t_data *frac);
 void    parse(int ac, char **argv, t_data *frac);
-void	fractal_draw(t_data *frac);
+int	fractal_draw(t_data *frac);
 /**************************************************/
 
 /****  aux.c - general mlx functions ******/
 void    ft_pixel_put(t_data *frac, int a, int b, int color);
 int     ft_color(t_data *frac);
+int     ft_key_hook(int key, t_data *frac);
+void    ft_move(int key, t_data *frac);
 
 /****  mandelbrot.c - all functions related to mandelbrot ******/
 void    set_mandelbrot(t_data *frac);

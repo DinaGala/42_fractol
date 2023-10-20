@@ -15,36 +15,37 @@
 int	ft_free(t_data *frac)
 {
 //	ft_printf("Enter ft_free \n"); //erase
-	if (frac && frac->img && frac->img->ipt)
-		mlx_destroy_image(frac->init, frac->img->ipt);
 	if (frac && frac->win)
 		mlx_destroy_window(frac->init, frac->win);
+//	if (frac && frac->img && frac->img->ipt)
+//		mlx_destroy_image(frac->init, frac->img->ipt);
 //	mlx_destroy_display(frac->init);
 //	free(frac->init);
 //	frac->init = NULL;
 	exit (1);
 }
 
-void	fractal_draw(t_data *frac)
+int	fractal_draw(t_data *frac)
 {
 	int	a;
 	int	b;
 
 	a = -1;
-//	printf("entering draw, ymax %f \n", frac->lim.ymax); //erase
+	printf("entering draw, ymax %f ymin %f\n", frac->lim.ymax, frac->lim.ymin); //erase
 	while (++a < WIDTH)
 	{
 		frac->x = frac->lim.xmin + (double)a * (frac->lim.xmax - \
 			frac->lim.xmin) / WIDTH;
 		b = -1;
-	//	printf("x %f \n", frac->x); //erase
+		if (a < 4)
+			printf("x %f b %i\n", frac->x, a); //erase
 		while (++b < HEIGHT)
 		{
 			frac->y = frac->lim.ymin + (double)b * (frac->lim.ymax - \
 			frac->lim.ymin) / HEIGHT;
-	//		if (a == 0)
-	//			printf("ymin %f b %f, max %f, diff %f, height %i\n", frac->lim->ymin, (double)b, frac->lim->ymax, frac->lim->ymax - \
-	//		frac->lim->ymin, HEIGHT); //erase
+			if (a == 0)
+				printf("ymin %f b %f, max %f, diff %f, height %i\n", frac->lim.ymin, (double)b, frac->lim.ymax, frac->lim.ymax - \
+			frac->lim.ymin, HEIGHT); //erase
 			if (frac->type == 1)
 				draw_mandel(frac);
 	//		ft_printf("I'm in the fractal_draw"); //erase
@@ -52,12 +53,14 @@ void	fractal_draw(t_data *frac)
 				draw_julia(frac);
 			else if (frac->type == 3)
 				draw_ship(frac);
+//			ft_printf("Before pixel put"); //erase
 			ft_pixel_put(frac, a, b, ft_color(frac));
 		}
 //		ft_printf("after pixel put %i \n", a); //erase
 	}
 //	ft_printf("before put to window \n"); //erase
 	mlx_put_image_to_window(frac->init, frac->win, frac->img->ipt, 0, 0);
+	return (1);
 //	ft_printf("after put to window \n"); //erase
 }
 
@@ -114,7 +117,7 @@ void	parse(int ac, char **argv, t_data *frac)
 		ft_printf("1. mandelbrot\n2. julia\n3. burning_ship\n");
 		exit (1);
 	}
-	printf("leaving set, ymax %f \n", frac->lim.ymax); //erase
+//	printf("leaving set, ymax %f \n", frac->lim.ymax); //erase
 }
 
 int	main(int argc, char **argv)
@@ -134,9 +137,13 @@ int	main(int argc, char **argv)
 //	&frac.img->line, &frac.img->endian);
 //	ft_pixel_put(&frac, 5, 5, 0x224477);
 //	mlx_put_image_to_window(frac.init, frac.win, frac.img->ipt, 0, 0);
-	mlx_hook(frac.win, 17, 1L << 0, ft_free, &frac);
+	mlx_hook(frac.win, 17, 0, ft_free, &frac);
+//	mlx_hook(frac.win, 53, 0, ft_free, &frac);
+	mlx_key_hook(frac.win, ft_key_hook, &frac);
+//	mlx_hook(frac.win, ARROW_LEFT, 0, ft_move, &frac);
 //	mlx_key_hook(frac.win, ft_key_hook, &frac);
 //	mlx_key_hook(frac.win, fn, (void *)0);
+
 	mlx_loop(frac.init);
 //	ft_free(&frac);
 	return (0);

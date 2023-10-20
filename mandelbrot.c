@@ -14,7 +14,7 @@
 
 void    set_mandelbrot(t_data *frac)
 {
-    ft_printf("enter set:\n"); //erase
+//    ft_printf("enter set:\n"); //erase
     frac -> type = 1;
     frac -> lim.xmin = -2.1;
     frac -> lim.xmax = 0.7;
@@ -22,7 +22,7 @@ void    set_mandelbrot(t_data *frac)
     frac -> lim.ymax = 1.2;
     frac -> lim.cr = 0;
     frac -> lim.cim = 0;
-    printf("x min: %f  ymax: %f\n", frac -> lim.xmin, frac -> lim.ymax); //erase
+ //   printf("x min: %f  ymax: %f\n", frac -> lim.xmin, frac -> lim.ymax); //erase
 }
 
 void    draw_mandel(t_data *frac)
