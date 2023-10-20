@@ -12,10 +12,11 @@
 
 NAME = fractol
 CC = cc
-FLAGS = -Wall -Wextra -Werror -MMD -I ./
+FLAGS = -Wall -Wextra -Werror -MMD -I ./ -g -fsanitize=address
 ML_FLAGS = -framework OpenGL -framework AppKit
 
-SRC = fractol.c aux.c mandelbrot.c julia.c burning_ship.c
+SRC = fractol.c aux.c mandelbrot.c 
+#julia.c burning_ship.c
 OBJ = $(SRC:.c=.o)
 DEPS = $(SRC:.c=.d)
 
@@ -30,7 +31,7 @@ SRC_ML = ./minilibx/libmlx.a
 MAKE_ML = make -C minilibx --no-print-directory
 
 %.o: %.c Makefile
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -Iminilibx -Ilibft -c $< -o $@
 
 all: make_lib make_ml $(NAME)
 
@@ -42,7 +43,7 @@ make_ml:
 
 -include $(DEPS)
 $(NAME): $(OBJ) $(SRC_LIBFT) $(SRC_ML)
-	$(CC) $(FLAGS) $(ML_FLAGS) $(^) -o $(NAME)
+	$(CC) $(FLAGS) -Lminilibx $(ML_FLAGS) $(^) -o $(NAME)
 
 bonus:  make_lib make_ml .bonusf
 

@@ -15,13 +15,14 @@
 int	ft_free(t_data *frac)
 {
 	ft_printf("Enter ft_free \n"); //erase
-	if (frac->img->ipt)
+	if (frac && frac->img && frac->img->ipt)
 		mlx_destroy_image(frac->init, frac->img->ipt);
-	if (frac->win)
+	if (frac && frac->win)
 		mlx_destroy_window(frac->init, frac->win);
 //	mlx_destroy_display(frac->init);
-	free(frac->init);
-	return (1);
+//	free(frac->init);
+//	frac->init = NULL;
+	exit (1);
 }
 
 void	fractal_draw(t_data *frac)
@@ -30,15 +31,20 @@ void	fractal_draw(t_data *frac)
 	int	b;
 
 	a = -1;
-	while (a++ < WIDTH)
+	printf("entering draw, ymax %f \n", frac->lim.ymax); //erase
+	while (++a < WIDTH)
 	{
-		frac->x = frac->lim->xmin + (double)a * (frac->lim->xmax - \
-			frac->lim->xmin) / WIDTH;
+		frac->x = frac->lim.xmin + (double)a * (frac->lim.xmax - \
+			frac->lim.xmin) / WIDTH;
 		b = -1;
-		while (b++ < HEIGHT)
+	//	printf("x %f \n", frac->x); //erase
+		while (++b < HEIGHT)
 		{
-			frac->y = frac->lim->ymin + (double)b * (frac->lim->ymax - \
-			frac->lim->ymin) / HEIGHT;
+			frac->y = frac->lim.ymin + (double)b * (frac->lim.ymax - \
+			frac->lim.ymin) / HEIGHT;
+	//		if (a == 0)
+	//			printf("ymin %f b %f, max %f, diff %f, height %i\n", frac->lim->ymin, (double)b, frac->lim->ymax, frac->lim->ymax - \
+	//		frac->lim->ymin, HEIGHT); //erase
 			if (frac->type == 1)
 				draw_mandel(frac);
 	//		ft_printf("I'm in the fractal_draw"); //erase
@@ -46,9 +52,9 @@ void	fractal_draw(t_data *frac)
 		//		draw_julia(frac);
 		//	else if (frac->type == 3)
 		//		draw_ship(frac);
-			ft_pixel_put(frac, a, b);
+			ft_pixel_put(frac, a, b, ft_color(frac));
 		}
-		ft_printf("after pixel put %i \n", a); //erase
+//		ft_printf("after pixel put %i \n", a); //erase
 	}
 	ft_printf("before put to window \n"); //erase
 	mlx_put_image_to_window(frac->init, frac->win, frac->img->ipt, 0, 0);
@@ -67,47 +73,70 @@ void	initialize(char *name, t_data *frac)
 		exit (1);
 	frac->win = mlx_new_window(frac->init, WIDTH, HEIGHT, name);
 	if (!frac->win)
-		exit (ft_free(frac));
+	{
+		free(frac->init);
+		exit (1);
+	}
 	frac->img = &img;
 	frac->img->ipt = mlx_new_image(frac->init, WIDTH, HEIGHT);
-	if (!frac->img->ipt)
-		exit (ft_free(frac));
+//	if (!frac->img->ipt)
+//		exit (ft_free(frac));
+	printf("before new get data addr, ymax %f \n", frac->lim.ymax); //erase
 	frac->img->ppt = mlx_get_data_addr(frac->img->ipt, &frac->img->bits, \
 	&frac->img->line, &frac->img->endian);
+	printf("after new get data addr, ymax %f \n", frac->lim.ymax); //erase
+//	printf("after initialize, ymax %f \n", frac->lim->ymax); //erase
 	fractal_draw(frac);
-	ft_printf("after initialize \n"); //erase
+//	ft_printf("after initialize \n"); //erase
 }
 
 void	parse(int ac, char **argv, t_data *frac)
 {
 	t_lim   lim;
 
-	frac->lim = &lim;
+	ft_memset(&lim, 0, sizeof(t_lim));
+	frac->lim = lim;
+//	return ;
 	if (ac == 2 && !ft_strncmp(argv[1], "mandelbrot", 10) && !*(argv[1] + 10))
+	{
 		set_mandelbrot(frac);
-	else if (ac >= 2 && !ft_strncmp(argv[1], "julia", 5) && !*(argv[1] + 5))
+	}	
+/*	else if (ac >= 2 && !ft_strncmp(argv[1], "julia", 5) && !*(argv[1] + 5))
 	{
 		frac->type = 2;
 		set_julia(ac, argv, frac);
 	}
 	else if (ac == 2 && !ft_strncmp(argv[1], "burning_ship", 12) \
 	&& !*(argv[1] + 12))
-		set_bship(frac);
+		set_bship(frac);*/
 	else
 	{
 		ft_printf("Introduce one of the available fractals:\n");
 		ft_printf("1. mandelbrot\n2. julia\n3. burning_ship\n");
 		exit (1);
 	}
+	printf("leaving set, ymax %f \n", frac->lim.ymax); //erase
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	frac;
+//	t_img	img;
 
+//	ft_memset(&frac, 0, sizeof(t_data));
 	parse(argc, argv, &frac);
 //	ft_printf("After parsing"); //erase
 	initialize(argv[1], &frac);
+//	frac.init = mlx_init();
+//	frac.win = mlx_new_window(frac.init, WIDTH, HEIGHT, "try");
+//	frac.img = &img;
+//	frac.img->ipt = mlx_new_image(frac.init, WIDTH, HEIGHT);
+//	frac.img->ppt = mlx_get_data_addr(frac.img->ipt, &frac.img->bits, \
+//	&frac.img->line, &frac.img->endian);
+//	ft_pixel_put(&frac, 5, 5, 0x224477);
+//	mlx_put_image_to_window(frac.init, frac.win, frac.img->ipt, 0, 0);
+//	mlx_hook(frac.win, 17, 0, ft_free, &frac);
+//	mlx_key_hook(frac.win, ft_key_hook, &frac);
 //	mlx_key_hook(frac.win, fn, (void *)0);
 	mlx_loop(frac.init);
 //	ft_free(&frac);

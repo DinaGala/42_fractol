@@ -15,6 +15,7 @@
  
 # include "./minilibx/mlx.h"
 # include "./libft/libft.h"
+# include "keys.h"
 //# include <X11/keysymdef.h>
 # include <math.h>
 # include <stdio.h>
@@ -22,8 +23,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define HEIGHT 10
-# define WIDTH 10
+# define HEIGHT 1000
+# define WIDTH 1300
 # define COLOR 
 
 typedef struct s_lim
@@ -50,11 +51,12 @@ typedef struct s_data
     void    *init;
     void    *win;
     int     type;
-    int     x;
-    int     y;
+    double     x;
+    double     y;
     int     i;
+    t_lim   lim;
     t_img   *img;
-    t_lim   *lim;
+  
 } t_data;
 
 /****  fractol.c - main and creating a window ******/
@@ -65,20 +67,20 @@ void	fractal_draw(t_data *frac);
 /**************************************************/
 
 /****  aux.c - general mlx functions ******/
-void    ft_pixel_put(t_data *frac, int a, int b);
+void    ft_pixel_put(t_data *frac, int a, int b, int color);
 int     ft_color(t_data *frac);
 
 /****  mandelbrot.c - all functions related to mandelbrot ******/
 void    set_mandelbrot(t_data *frac);
 void    draw_mandel(t_data *frac);
 
-/****  julia.c - all functions related to julia ******/
+/****  julia.c - all functions related to julia ******
 void    set_julia(int argc, char **argv, t_data *frac);
 int     ft_atof(char *str, double *c);
-void    draw_julia(t_data *frac);
+void    draw_julia(t_data *frac);*/
 
-/****  burning_ship.c - all functions related to burning_ship ******/
+/****  burning_ship.c - all functions related to burning_ship ******
 void    set_bship(t_data *frac);
-void    draw_julia(t_data *frac);
+void    draw_julia(t_data *frac);*/
 
 #endif
