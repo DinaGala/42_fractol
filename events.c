@@ -49,7 +49,7 @@ void    ft_zoom(int key, double x, double y, t_data *frac)
 
     x_len = frac->lim.xmax - frac->lim.xmin;
     y_len = frac->lim.ymax - frac->lim.ymin;
-    printf("coordinates: x - %f, y - %f\n", (double)x, (double)y); // erase
+ //   printf("coordinates: x - %f, y - %f\n", (double)x, (double)y); // erase
     if (key == ZOOM_IN)
     {
         frac->lim.xmin -= ((x_len / ZOOM) - x_len) * x;

@@ -34,7 +34,7 @@ void    draw_ship(t_data *frac)
     frac -> i = -1;
  //   ft_printf("Entered draw mandel\n"); //erase
  //   printf("y: %f  x: %f\n", frac->y, frac->x); //erase
-    while ((x * x + y * y) <= 4.0 && ++frac->i < 100)
+    while ((x * x + y * y) <= 7.0 && ++frac->i < 300)
     {
         temp = x * x - y * y + frac->x;
         y = fabs(2 * x * y) + frac->y;
@@ -53,7 +53,7 @@ void    draw_zhuzhleva(t_data *frac)
     frac -> i = -1;
  //   ft_printf("Entered draw mandel\n"); //erase
  //   printf("y: %f  x: %f\n", frac->y, frac->x); //erase
-    while ((x * x + y * y) <= 4.0 && ++frac->i < 1000)
+    while ((x * x + y * y) <= 12.0 && ++frac->i < 100)
     {
         temp = x * x - y * y + frac->x;
         y = fabs(2 * x) * y + frac->y;

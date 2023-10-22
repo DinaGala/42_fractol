@@ -98,7 +98,7 @@ void	initialize(char *name, t_data *frac)
 	&frac->img.line, &frac->img.endian);
 //	printf("after new get data addr, ymax %f \n", frac->lim.ymax); //erase
 //	printf("after initialize, ymax %f \n", frac->lim->ymax); //erase
-	frac->color = 1;
+	frac->color = 3;
 	fractal_draw(frac);
 //	ft_printf("after initialize \n"); //erase
 }

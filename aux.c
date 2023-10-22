@@ -32,7 +32,9 @@ int ft_color(t_data *frac)
     if (frac->i == 100)
         return (0x000000);
     else
-        return (frac->color * frac->color * 200 * frac->i);
+        return (240 * frac->i * frac->color << 16 \
+        | 50 * frac->i * frac->color << 8 \
+        | frac->i * frac->color);
  /*   else if (frac->i > 20)
         return (0x227640);
     else if (frac->i > 5)
@@ -46,7 +48,12 @@ int ft_key_hook(int key, t_data *frac)
     if (key == ESC)
         ft_free(frac);
     else if (key == SHIFT)
-        frac->color++;
+    {    
+        if (frac->color < 100)
+            frac->color *= 4;
+        else
+            frac->color = 20;
+    }
     else
         return (1);
     fractal_draw(frac);
@@ -65,10 +72,10 @@ int ft_mouse_hook(int key, int  x, int  y, t_data *frac)
 {
     if (frac -> type == 2 && key == LEFT_CLICK)
 	{
-		printf("coordinates: x - %f, y - %f\n", (double)x, (double)y); // erase
+//		printf("coordinates: x - %f, y - %f\n", (double)x, (double)y); // erase
         frac->lim.cr = -3 + 6 * (double)x / WIDTH;
 		frac->lim.cim = -3 + 6 * (double)y / HEIGHT;
-        printf("next c: cr - %f, cim - %f\n", frac->lim.cr, frac->lim.cim); //erase
+//        printf("next c: cr - %f, cim - %f\n", frac->lim.cr, frac->lim.cim); //erase
 	}
     if (key == ZOOM_IN || key == ZOOM_OUT)
         ft_zoom(key, (double)x / WIDTH, (double)y / (HEIGHT), frac);

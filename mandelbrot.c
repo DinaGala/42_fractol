@@ -36,7 +36,7 @@ void    draw_mandel(t_data *frac)
     frac -> i = -1;
  //   ft_printf("Entered draw mandel\n"); //erase
  //   printf("y: %f  x: %f\n", frac->y, frac->x); //erase
-    while ((x * x + y * y) <= 4.0 && ++frac->i < 100)
+    while ((x * x + y * y) <= 6.0 && ++frac->i < 100)
     {
         temp = x * x - y * y + frac->x;
         y = 2 * x * y + frac->y;

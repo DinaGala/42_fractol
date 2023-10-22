@@ -78,7 +78,7 @@ void    draw_julia(t_data *frac)
     frac -> i = -1;
  //   ft_printf("Entered draw mandel\n"); //erase
  //   printf("y: %f  x: %f\n", frac->y, frac->x); //erase
-    while ((x * x + y * y) <= 4.0 && ++frac->i < 100)
+    while ((x * x + y * y) <=10.0 && ++frac->i < 100)
     {
         x = x * x - y * y + frac->lim.cr;
         y = 2 * x * y + frac->lim.cim;
