@@ -12,11 +12,11 @@
 
 NAME = fractol
 CC = cc
-FLAGS = -Wall -Wextra -Werror -MMD -I ./ -o3 -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -MMD -I ./ -o3 #-g -fsanitize=address
 ML_FLAGS = -framework OpenGL -framework AppKit
 
 SRC = fractol.c aux.c events.c mandelbrot.c julia.c burning_ship.c
-# 
+
 OBJ = $(SRC:.c=.o)
 DEPS = $(SRC:.c=.d)
 
@@ -60,7 +60,6 @@ clean:
 fclean: clean
 	rm -f $(NAME) .bonusf
 	$(MAKE_LIBFT) fclean
-	$(MAKE_ML) fclean
 
 re: fclean all
 
