@@ -54,8 +54,9 @@ typedef struct s_data
     double     x;
     double     y;
     int     i;
+    int     color;
     t_lim   lim;
-    t_img   *img;
+    t_img   img;
   
 } t_data;
 
@@ -66,11 +67,17 @@ void    parse(int ac, char **argv, t_data *frac);
 int	fractal_draw(t_data *frac);
 /**************************************************/
 
-/****  aux.c - general mlx functions ******/
+/****  aux.c - hooks and pixel put ******/
 void    ft_pixel_put(t_data *frac, int a, int b, int color);
 int     ft_color(t_data *frac);
+int ft_read_keys(int key, t_data *frac);
 int     ft_key_hook(int key, t_data *frac);
+int ft_mouse_hook(int key, int x, int y, t_data *frac);
+/**************************************************/
+
+/****  events.c - event functions - move, zoom, etc. ******/
 void    ft_move(int key, t_data *frac);
+void    ft_zoom(int key, double x, double y, t_data *frac);
 
 /****  mandelbrot.c - all functions related to mandelbrot ******/
 void    set_mandelbrot(t_data *frac);
@@ -84,5 +91,6 @@ void    draw_julia(t_data *frac);
 /****  burning_ship.c - all functions related to burning_ship ******/
 void    set_ship(t_data *frac);
 void    draw_ship(t_data *frac);
+void    draw_zhuzhleva(t_data *frac);
 
 #endif
