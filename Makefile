@@ -12,10 +12,10 @@
 
 NAME = fractol
 CC = cc
-FLAGS = -Wall -Wextra -Werror -MMD -I ./ -o3 -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -MMD -I ./ -o3 #-g -fsanitize=address
 ML_FLAGS = -framework OpenGL -framework AppKit
 
-SRC = fractol.c aux.c events.c mandelbrot.c julia.c burning_ship.c
+SRC = fractol.c aux.c events.c manormi	ndelbrot.c julia.c burning_ship.c
 
 OBJ = $(SRC:.c=.o)
 DEPS = $(SRC:.c=.d)

@@ -16,7 +16,6 @@ int	ft_free(t_data *frac)
 {
 	if (frac && frac->win)
 		mlx_destroy_window(frac->init, frac->win);
-
 	exit (1);
 }
 

@@ -26,9 +26,9 @@ void    set_julia(int argc, char **argv, t_data *frac)
     }
     if (argc == 2 || flag > 0 || argc == 3 || argc > 4)
     {
-        ft_printf("You can follow the name of julia by 2 numbers to change");
-        ft_printf("it's shape\nExample: ./fractol julia 0.3 -0.56\n");
-        ft_printf("OR simply press the LEFT mouse button\n");
+        ft_printf("You can follow the name of julia by 2 numbers (from -2.0 ");
+        ft_printf("to 2.0) to change it's shape.\nExample: ./fractol julia ");
+        ft_printf("0.3 -0.56\nOR simply press the LEFT mouse button\n");
         if (flag > 0 || argc == 3 || argc > 4)
             exit (1);
     }
@@ -59,7 +59,7 @@ int ft_atof(char *str, double *c)
             d *= 0.1;
         }
     }
-    if (str[i] || (str[0] == '-' && x == 0))
+    if (str[i] || (str[0] == '-' && x == 0) || x > 2)
         return (1);
     if (str[0] == '-')
         x *= -1;
