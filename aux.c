@@ -16,31 +16,26 @@ void    ft_pixel_put(t_data *frac, int x, int y, int color)
 {
     char    *pix;
 
- /*   if (x == 0 && y == 0)
-    {
-        printf("in pixel put: ppt - %p\nline - %i\nbits - %i\n", frac->img.ppt, \
-        frac->img.line, frac->img.bits); // erase
-    }*/
     pix = frac->img.ppt + (frac->img.line * y + x * (frac->img.bits / 8));
-  /*  if (x == 0 && y == 0)
-        printf("pix - %s, pointer - %p\n", pix, (int*)pix); */
-    *(int*)pix = color; //what is going to happen if i do not cast it?
+    *(int*)pix = color;
 }
 
 int ft_color(t_data *frac)
 {
     if (frac->i == 100)
         return (0x000000);
+    else if (frac->type == 3)
+        return (frac->i * frac->color << 16 \
+        | frac->color << 8 \
+        | frac->i);
+    else if (frac->type == 1)
+        return (frac->i * frac->color << 16 \
+        | frac->i * frac->color << 8 \
+        | frac->i);
     else
         return (240 * frac->i * frac->color << 16 \
         | 50 * frac->i * frac->color << 8 \
         | frac->i * frac->color);
- /*   else if (frac->i > 20)
-        return (0x227640);
-    else if (frac->i > 5)
-        return (0x767640);
-    else
-        return (0x373889); */
 }
 
 int ft_key_hook(int key, t_data *frac)
@@ -49,10 +44,10 @@ int ft_key_hook(int key, t_data *frac)
         ft_free(frac);
     else if (key == SHIFT)
     {    
-        if (frac->color < 100)
-            frac->color *= 4;
+        if (frac->color < 1000)
+            frac->color *= 3;
         else
-            frac->color = 20;
+            frac->color = 1;
     }
     else
         return (1);
@@ -72,10 +67,11 @@ int ft_mouse_hook(int key, int  x, int  y, t_data *frac)
 {
     if (frac -> type == 2 && key == LEFT_CLICK)
 	{
-//		printf("coordinates: x - %f, y - %f\n", (double)x, (double)y); // erase
-        frac->lim.cr = -3 + 6 * (double)x / WIDTH;
-		frac->lim.cim = -3 + 6 * (double)y / HEIGHT;
-//        printf("next c: cr - %f, cim - %f\n", frac->lim.cr, frac->lim.cim); //erase
+
+        frac->lim.cr = -2 + (frac->lim.xmax - frac->lim.xmin) * \
+        (double)x / WIDTH;
+		frac->lim.cim = -2 + (frac->lim.ymax - frac->lim.ymin) * \
+        (double)y / HEIGHT;
 	}
     if (key == ZOOM_IN || key == ZOOM_OUT)
         ft_zoom(key, (double)x / WIDTH, (double)y / (HEIGHT), frac);

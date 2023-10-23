@@ -26,9 +26,9 @@ void    set_julia(int argc, char **argv, t_data *frac)
     }
     if (argc == 2 || flag > 0 || argc == 3 || argc > 4)
     {
-        ft_printf("You can follow the name of julia by 2 numbers\n");
-        ft_printf("to change the constant part of the equation:\n");
-        ft_printf("Example: ./fractol julia 0.3 -0.56\n");
+        ft_printf("You can follow the name of julia by 2 numbers to change");
+        ft_printf("it's shape\nExample: ./fractol julia 0.3 -0.56\n");
+        ft_printf("OR simply press the LEFT mouse button\n");
         if (flag > 0 || argc == 3 || argc > 4)
             exit (1);
     }
@@ -71,16 +71,15 @@ void    draw_julia(t_data *frac)
 {
     double  x;
     double  y;
- //   double  temp;
+    double  temp;
 
     x = frac->x;
     y = frac->y;
     frac -> i = -1;
- //   ft_printf("Entered draw mandel\n"); //erase
- //   printf("y: %f  x: %f\n", frac->y, frac->x); //erase
-    while ((x * x + y * y) <=10.0 && ++frac->i < 100)
+    while ((x * x + y * y) <= 10.0 && ++frac->i < 100)
     {
-        x = x * x - y * y + frac->lim.cr;
+        temp = x * x - y * y + frac->lim.cr;
         y = 2 * x * y + frac->lim.cim;
+        x = temp;
     }
 }
