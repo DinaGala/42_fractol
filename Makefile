@@ -20,7 +20,8 @@ SRC = fractol.c aux.c events.c mandelbrot.c julia.c burning_ship.c
 OBJ = $(SRC:.c=.o)
 DEPS = $(SRC:.c=.d)
 
-SRC_BONUS = 
+SRC_BONUS = fractol_bonus.c aux_bonus.c events_bonus.c mandelbrot_bonus.c \
+julia_bonus.c burning_ship_bonus.c
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 DEPS_BONUS = $(SRC_BONUS:.c=.d)
 
