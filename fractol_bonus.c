@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nzhuzhle <nzhuzhle@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 22:23:10 by nzhuzhle          #+#    #+#             */
+/*   Updated: 2023/10/25 22:23:14 by nzhuzhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol_bonus.h"
 
@@ -65,7 +75,7 @@ void	initialize(char *name, t_data *frac)
 
 void	parse(int ac, char **argv, t_data *frac)
 {
-	t_lim   lim;
+	t_lim	lim;
 
 	ft_memset(&lim, 0, sizeof(t_lim));
 	frac->lim = lim;

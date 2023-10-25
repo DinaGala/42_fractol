@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:02:15 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2023/10/10 21:29:09 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2023/10/25 22:08:30 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	initialize(char *name, t_data *frac)
 
 void	parse(int ac, char **argv, t_data *frac)
 {
-	t_lim   lim;
+	t_lim	lim;
 
 	ft_memset(&lim, 0, sizeof(t_lim));
 	frac->lim = lim;
